@@ -1,5 +1,5 @@
 const express = require('express');
-const useRoute = require('./routes/route');
+const authRoute = require('./routes/authRoute');
 const cors = require('cors');
 const app = express();
 const blogRoute = require('./routes/blogRoute')
@@ -8,9 +8,8 @@ const blogRoute = require('./routes/blogRoute')
 app.use(express.json());
 app.use(cors());
 //Route
-app.use("/",useRoute.route);
-app.use("/",blogRoute.route)
-
+app.use("/",authRoute.route);
+app.use("/",blogRoute.route);
 app.listen(8080,()=>{
     console.log("server started")
 })
