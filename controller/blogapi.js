@@ -17,16 +17,22 @@ exports.createBlog = async(req,res)=>{
         }
     })
 }
-
-  exports.takeBlog =async(req,res) => {
-    db.query('SELECT * FROM blog', (err,result)=>{
+//taking data from blog table
+exports.takeBlog = async (req, res) => {
+  try {
+    db.query('SELECT * FROM blog', (err, results) => {
       if (err) {
-        console.error('Error inserting data:', err); 
+        console.error('Error fetching data:', err);
         res.status(500).json({ error: 'Internal server error' });
       } else {
-        console.log('successfully:', result);
-        res.status(200).json({ message: result });
+        console.log('Successfully fetched data:', results);
+        res.json(results); // Assuming results is an array of blog posts
       }
-    })
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
+};
+
 
